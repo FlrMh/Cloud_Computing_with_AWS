@@ -2,6 +2,8 @@
 
 !!! Note: Make sure our account always has `Ireland(eu-west-01)` as location.
 
+![](EC2diagram.PNG)
+
 1. Search EC2.
 
 2. Select EC2 and `launch an instance`.
