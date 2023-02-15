@@ -1,4 +1,4 @@
-Creating a cloud EC2 instance(scalable cloud VM) for our local monolith(our app and database VMs):
+# Creating an AWS EC2 instance(scalable cloud VM) for our local monolith(our app and database VMs):
 
 !!! Note: Make sure our account always has `Ireland(eu-west-01)` as location.
 
@@ -44,3 +44,22 @@ Creating a cloud EC2 instance(scalable cloud VM) for our local monolith(our app 
 10. Launch the instance.
 
 11. Click the ID to get to the dashboard and see the created instance.
+
+## Entering the EC2 instance we have just created
+
+- We created the instance, and the system will run some checks in the background, especially checking if the connection code is `200`. If that is the case, the instance will show on the dashboard as `Running`.
+- Now, we have to make sure we did the correct configurations and everything worked as expected. So we need to enter the instance through our local computer.
+- So, in order to get in the machine, we need to be able to SSH in the machine.
+1. Select your instance, and click `Connect` button at the top.
+2. It will take us to a menu with some information and instructions.
+3. Let`s go on the SSH Client tab and we can see the information re. our session ID, the key location, and commands to enter the VM through terminal.
+4. Lets go to git bash terminal on our local host.
+5. Go in the folder where we have the access key to connect to the instance: should be in the `.ssh` folder.
+6. Run `chmod 400 YourKeyFile.pem` to ensure your key is not publicly viewable.
+7. Then `ssh -i "YourKeyFile.pem" ubuntu@yourInstancePublicDNS.com`
+8. Run `sudo apt-get update-y`
+9. Run `sudo apt-get upgrade -y`
+10. Run `sudo agt-get install nginx -y`
+11. Copy and paste your I.P. address from the EC2 Instance Connect tab, into a web browser, and should be able to see the `Welcome to nginx!` web page.
+
+![](nginx.PNG)
