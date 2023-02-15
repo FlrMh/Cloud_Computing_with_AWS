@@ -65,3 +65,13 @@
 11. Copy and paste your I.P. address from the EC2 Instance Connect tab, into a web browser, and should be able to see the `Welcome to nginx!` web page.
 
 ![](nginx.PNG)
+
+
+!! Note: If you get a `Connection timed out` error - it is a port 22 issue. That means, that your computer might have a Dynamic IP address.
+
+![](timedout.PNG)
+
+- Go to your Instance`s Security.
+- Access your Security Group.
+- Edit your security group configurations: On port 22: Switch to `My IP` (if not already configured like that).
+- Should now work, and you should be able to `ssh` in the instance through your bash terminal.
