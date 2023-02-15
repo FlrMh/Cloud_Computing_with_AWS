@@ -49,6 +49,8 @@
 
 ## Entering the EC2 instance we have just created
 
+
+
 - We created the instance, and the system will run some checks in the background, especially checking if the connection code is `200`. If that is the case, the instance will show on the dashboard as `Running`.
 - Now, we have to make sure we did the correct configurations and everything worked as expected. So we need to enter the instance through our local computer.
 - So, in order to get in the machine, we need to be able to SSH in the machine.
@@ -75,3 +77,19 @@
 - Access your Security Group.
 - Edit your security group configurations: On port 22: Switch to `My IP` (if not already configured like that).
 - Should now work, and you should be able to `ssh` in the instance through your bash terminal.
+
+
+## Migrating our `app` folder to our EC2 Instance and running our app on the cloud
+
+- Migrating a folder to your EC2 AWS instance can be done by using the `scp` method.
+- In order to do that, first open a `git bash` terminal, and go into the .ssh folder to run the following command.
+
+```
+scp -i devops-tech201.pem -r <absolute path of your folder> ubuntu@<your_instance_public_DNS>:/home/ubuntu
+```
+
+- It will take a very long time to copy everything, depending on how many files you have within the foder you are migrating.
+- However, when it is done, you should simply be aple to run `ls` and see the folder you have just migrated.
+
+![](app_folder.PNG)
+
