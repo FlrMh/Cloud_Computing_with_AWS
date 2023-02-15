@@ -42,3 +42,5 @@ Creating a cloud EC2 instance(scalable cloud VM) for our local monolith(our app 
 - Need to make sure it matches the configuration we just made. 
 
 10. Launch the instance.
+
+11. Click the ID to get to the dashboard and see the created instance.
