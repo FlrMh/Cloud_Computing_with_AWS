@@ -200,3 +200,57 @@ sudo systemctl enable mongod
 ```
 sudo systemctl status mongod
 ```
+
+- Lastly, we will have to change the configurations for mongo.db to allow the database to be accessed from anywhere, as long as it is accessed through the `27017` port. This would be the same as we did in ptovision file, only we will do it manually to make sure everything works as required. 
+
+```
+sudo nano /etc/mongod.conf
+# go to the network interface section and replace the current bindIP with 0.0.0.0
+
+```
+- After we change the bidIP, we have to make sure we restart and re-enable mongo.db:
+
+```
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+```
+- Now, our database should be ready and accesible through port 27017.
+
+---
+
+
+## Tier 2 architecture - Connecting our `app` and `database` EC2 instances
+
+- Now, that we have our `app` Ec2 instance set up and running properly, and the `database` EC2 instance with mongo.db active and allowing connections through port 27017, we only have to create an env variable wthin the `app` Ec2 instance that will connect us to the database.
+- Just like we previously did locally, let`d first make sure the app is running properly.
+```
+ssh -i <key_file.pem> ubuntu@<your instance public DNS>
+
+cd app/
+
+npm install
+
+node app.js
+
+#these will allow us to check that first, our app is working as expected
+
+```
+
+- Now that our app is up and running, we need to create an env variable (at first we will not make it persistent, just because we want to make sure the connection is successful before we make the variable persistent).
+
+```
+export DB_HOST=mongodb://<database ip address>:27017/posts
+
+printenv DB_HOST # to check the env variable has been set correctly
+
+cd app/
+
+npm install
+
+node seeds/seed.js
+
+node app.js
+```
+- If everything was set up correctly, you should be able to see the posts page.
+
+![](images/workingposts.PNG)
