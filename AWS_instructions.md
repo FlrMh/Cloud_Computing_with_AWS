@@ -97,3 +97,24 @@ scp -i devops-tech201.pem -r <absolute path of your folder> ubuntu@<your_instanc
 
 ![](app_folder.PNG)
 
+- Now that our app folder is within out EC2 instance, we can check if nginx and node.js are installed:
+
+```
+nginx -v
+node -v
+```
+
+- Make sure that our Reverse Proxy settings are properly set by accessing the default file :
+
+```
+sudo nano /etc/nginx/sites-available/default # check if the `location` configuration mentions the port :3000 for proxy_pass.
+```
+- Run: 
+```
+sudo apt-get install npm
+
+node app.js 
+```
+- Now, you should be able to access your ap via the I.P. address of you EC2 instance, without having to mention the port number!
+
+![](reverseproxy.PNG)
