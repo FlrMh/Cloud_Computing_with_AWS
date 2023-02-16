@@ -126,11 +126,16 @@ node app.js
 
 ## Tier 2 architecture - Deploying our `database` VM on EC2
 
-- Requirements
+- In order to be able to deploy our 2tier architecture, we need to make sure our `database` EC2 instance (our second tier) is set properly on a separate instance than the `app`(our first tier), by following the next requirements. 
+- If everything is set properly, we should be able to get the two tiers communicating and we then have successfully deployed a 2tier architechture from a local monolith.
+
+![](requirement.png)
+
+### Requirements
 1. App tier deployed- available on public IP on port 3000(at least)
 
 
-- Now, let`s create 2nd tier with reuired dependencies:
+2. Now, let`s create 2nd tier with required dependencies:
 a. Ubuntu 18.04LTs
 b. Mongodb Installed
 c. Changed configurtion for Mongo.db to 0.0.0.0
@@ -138,3 +143,60 @@ d. Security group for our DB - allow 27017 from anywhere - allow only from app i
 e. Go back to the app, create the environment variable that allows the connection of the app to the database.
 f . Relaunch the app.
 g. Securing the database VE through a Firewall(security Group) : database can only be accessed through the app, the app can be accessed only through a secure shell(SSH).
+
+- After we created the instance with the required OS, we can ssh within the `database` instance and continue with configuring the other dependencies.
+```
+ ssh -i key_file.pem ubuntu@<your instance public DNS>
+
+```
+- Once inside the EC2 instance, we need to get the provision file for the `database` VM we created locally, so we can provision our EC2 database instance with the same dependencies as our locally created VM.
+- We can do that either by using the `scp` commad we used previously to migrate the `app` folder withinour `app` EC2 instance, or we can copy the file in our `database` EC2 instance by cloning the repository that contains the specific file and run it within our EC2 instance. 
+- If we want to use the `clone` method, simply run 
+```
+git clone <http of the repository where we have the database provision file>
+
+# navigate within the repo to the folder that holds the provision file for database
+
+# then change the permission for the provision file so it is executable
+
+sudo chmod +x <provisionfile.sh>
+
+# run the file so you can implement the dependancies
+
+sudo ./provisionfile.sh
+
+# check that mongodb is up and running by checking its status
+
+sudo systemctl status mongod
+```
+- If everything went well, you should be getting `active` as a status.
+
+![](activemongo.PNG)
+
+!!! Note: You might encounter issues if your provision.sh file containt specific changes for the mongodb configuration. 
+
+- For example, my provision file initially specified some changed to the network configurations for mongo.db. Those specific configuration changes need to be commented out in the provision.sh file, as they will create issues when running the provision file within our EC2 instance.
+- So, before running the provision file, make sure you run:
+```
+sudo nano <provisionfile.sh> # in order to comment out any specific configuration changes and have only the basic installation and enablement for mongo.db
+```
+- As a result, your provision file, before running it, should look like this:
+
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
+
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+
+```
+- If your provision file contains the previous commands, your mongodb shoud be up and running as expected when checked with:
+```
+sudo systemctl status mongod
+```
