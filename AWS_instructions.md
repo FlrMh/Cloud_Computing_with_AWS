@@ -22,7 +22,10 @@
 
 5. Select the instance type. In my case, `t2.micro`.
 
-6. Select a key pair for this instance. In my case, select the key I received to be able to access this instance and that I further stored within the `.ssh` folder on my local host. 
+6. Select a key pair for this instance. In my case, select the key I received to be able to access this instance and that I further stored within the `.ssh` folder on my local host.
+
+!!! Note: If a key matches a pair, the system copies the key and stores it on the other end point, so you do not need to check again.
+ 
 
 7. Network settings:
 

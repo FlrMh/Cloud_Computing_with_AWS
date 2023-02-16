@@ -52,3 +52,69 @@ CapEx and OpEx are two different types of expenses that organizations can incur.
 - OpEx (Operational Expenditure) refers to the ongoing, day-to-day expenses incurred by an organization to run its business, such as rent, utilities, wages, and supplies. OpEx is a recurring expense that is recorded on the income statement and is deducted from revenue to calculate the organization's profits or losses. Unlike CapEx, OpEx expenses are typically incurred on a regular basis, such as monthly or quarterly.
 
 Organizations need to balance their CapEx and OpEx expenses to maintain financial stability and sustainability. Generally, CapEx expenses are used to improve or expand the business, while OpEx expenses are used to sustain the current business operations.
+
+---
+
+## Tier 2 Architecture
+
+
+A tier 2 architecture, also known as a two-tier architecture or a client-server architecture, is a software architecture that divides an application into two main layers: the presentation layer, also known as the client, and the data management layer, also known as the server.
+
+The presentation layer is responsible for user interaction and is typically composed of a graphical user interface (GUI) that runs on a client device, such as a desktop computer or a mobile phone. The GUI communicates with the data management layer to perform operations and retrieve data.
+
+The data management layer is responsible for managing the application's data and performing business logic. It typically runs on a server or a cluster of servers and can handle multiple client connections simultaneously. This layer is responsible for storing, retrieving, and modifying data, and may also include components for security, transaction management, and other system-level services.
+
+In a tier 2 architecture, the presentation layer and the data management layer are typically connected using a network protocol, such as HTTP or TCP/IP. The client sends requests to the server, which processes the requests and returns responses to the client. This separation of concerns between the client and server allows for greater scalability, flexibility, and maintainability of the application.
+
+![](aws_diagram.PNG)
+
+---
+
+
+There are several reasons why a company might consider migrating from a monolithic architecture to a tier 2 architecture:
+
+1. Scalability: Monolithic architectures are typically designed to run on a single server or a small cluster of servers, which can limit their ability to handle increased traffic or data processing demands. In contrast, tier 2 architectures can be easily scaled horizontally by adding more servers to the pool, allowing them to handle much higher workloads.
+
+2. Resilience: Monolithic architectures can be more susceptible to downtime, as any issues with the application can affect the entire system. In a tier 2 architecture, components are decoupled and can be designed to handle failures independently, making the overall system more resilient.
+
+3. Maintainability: Monolithic architectures can be challenging to maintain and upgrade, as changes to one component can have unintended consequences for the rest of the system. In contrast, tier 2 architectures allow for more modular development, making it easier to add or modify specific components without affecting the entire system.
+
+4. Flexibility: Tier 2 architectures can allow for more flexibility in the choice of programming languages, databases, and other components, making it easier to adopt new technologies or integrate with other systems
+
+5. Team Organization: Monolithic architectures may require larger and more complex teams to maintain the system as a whole, whereas a tier 2 architecture allows for teams to be organized around smaller, more focused components.
+
+Overall, a migration from a monolithic architecture to a tier 2 architecture can offer several benefits in terms of scalability, resilience, maintainability, flexibility, and team organization. However, it's important to note that the migration process itself can be complex and time-consuming, so careful planning and execution are necessary to ensure a successful transition.
+
+---
+### How Does refactoring a monolith architecture into a 2tier architecture fit into DevOps and Agile
+
+
+
+
+- Refactoring a monolith into a tier 2 architecture can be a significant part of a DevOps strategy. DevOps is a software development methodology that emphasizes collaboration between development teams and operations teams, and aims to streamline the software development and delivery process. Refactoring a monolith into a tier 2 architecture can help facilitate this process in several ways:
+
+1. Continuous Integration and Deployment: By breaking down the monolith into smaller, more manageable components, it becomes easier to integrate and deploy changes to the application. This can help enable continuous integration and deployment, which are key aspects of a DevOps strategy.
+
+2. Automation: DevOps relies heavily on automation to streamline the software development and delivery process. Refactoring a monolith into a tier 2 architecture can help facilitate automation by making it easier to manage and deploy individual components, and by allowing for the use of tools and technologies that are specific to each component.
+
+3. Collaboration: DevOps emphasizes collaboration between development and operations teams. Refactoring a monolith into a tier 2 architecture can help facilitate this collaboration by breaking down the application into smaller, more manageable components, which can be worked on and deployed by smaller teams that are focused on specific areas of the application.
+
+4. Scalability: As mentioned earlier, a tier 2 architecture can be more scalable than a monolithic architecture, which can help support the rapid growth and changes that are often required in a DevOps environment.
+
+Overall, refactoring a monolith into a tier 2 architecture can be an important part of a DevOps strategy, as it can help enable continuous integration and deployment, automation, collaboration, and scalability.
+
+
+
+Refactoring a monolith into a tier 2 architecture can also fit into Agile or Scrum frameworks. Agile and Scrum are iterative and incremental software development methodologies that emphasize collaboration, flexibility, and delivering working software frequently.
+
+Refactoring a monolith into a tier 2 architecture can help support these methodologies in several ways:
+
+1. Flexibility: In an Agile or Scrum environment, requirements and priorities can change frequently. Refactoring a monolith into a tier 2 architecture can make it easier to accommodate these changes, as each component can be developed and deployed independently of the others.
+
+2. Collaborative Development: Agile and Scrum emphasize collaboration between development teams and stakeholders. Refactoring a monolith into a tier 2 architecture can help facilitate this collaboration by breaking down the application into smaller, more manageable components that can be worked on by smaller, cross-functional teams.
+
+3. Iterative and Incremental Development: In Agile and Scrum, development is done in small iterations or sprints. Refactoring a monolith into a tier 2 architecture can help enable this iterative and incremental development by breaking down the application into smaller components that can be developed and tested in isolation.
+
+4. Delivering Working Software Frequently: In Agile and Scrum, the goal is to deliver working software frequently. Refactoring a monolith into a tier 2 architecture can help enable this by making it easier to deploy individual components independently of each other.
+
+Overall, refactoring a monolith into a tier 2 architecture can be an important part of an Agile or Scrum framework, as it can help support flexibility, collaborative development, iterative and incremental development, and delivering working software frequently.
