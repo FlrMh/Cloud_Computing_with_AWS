@@ -2,7 +2,7 @@
 
 
 
-![](EC2.jpeg)
+![](imges/EC2.jpeg)
 
 ## Creating our EC2 instance:
 
@@ -73,12 +73,12 @@
 10. Run `sudo agt-get install nginx -y`
 11. Copy and paste your I.P. address from the EC2 Instance Connect tab, into a web browser, and should be able to see the `Welcome to nginx!` web page.
 
-![](nginx.PNG)
+![](images/nginx.PNG)
 
 
 !! Note: If you get a `Connection timed out` error - it is a port 22 issue. That means, that your computer might have a Dynamic IP address.
 
-![](timedout.PNG)
+![](images/timedout.PNG)
 
 - Go to your Instance`s Security.
 - Access your Security Group.
@@ -98,7 +98,7 @@ scp -i devops-tech201.pem -r <absolute path of your folder> ubuntu@<your_instanc
 - It will take a very long time to copy everything, depending on how many files you have within the foder you are migrating.
 - However, when it is done, you should simply be aple to run `ls` and see the folder you have just migrated.
 
-![](app_folder.PNG)
+![](images/app_folder.PNG)
 
 - Now that our app folder is within out EC2 instance, we can check if nginx and node.js are installed:
 
@@ -120,7 +120,7 @@ node app.js
 ```
 - Now, you should be able to access your ap via the I.P. address of you EC2 instance, without having to mention the port number!
 
-![](reverseproxy.PNG)
+![](images/reverseproxy.PNG)
 
 --- 
 
@@ -129,7 +129,7 @@ node app.js
 - In order to be able to deploy our 2tier architecture, we need to make sure our `database` EC2 instance (our second tier) is set properly on a separate instance than the `app`(our first tier), by following the next requirements. 
 - If everything is set properly, we should be able to get the two tiers communicating and we then have successfully deployed a 2tier architechture from a local monolith.
 
-![](requirement.png)
+![](images/requirement.png)
 
 ### Requirements
 1. App tier deployed- available on public IP on port 3000(at least)
@@ -171,7 +171,7 @@ sudo systemctl status mongod
 ```
 - If everything went well, you should be getting `active` as a status.
 
-![](activemongo.PNG)
+![](images/activemongo.PNG)
 
 !!! Note: You might encounter issues if your provision.sh file containt specific changes for the mongodb configuration. 
 

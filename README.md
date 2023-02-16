@@ -11,7 +11,7 @@ It allows individuals and organizations to *access and use computing resources a
 
 - Cloud computing provides several benefits, such as **increased agility, scalability, reliability, security, and cost-efficiency**. It is widely used by individuals, small and medium-sized businesses, and large enterprises for a variety of purposes, such as *data storage, application development, disaster recovery, and machine learning*.
 
-![](cloudcomputing2.png)
+![](images/cloudcomputing2.png)
 
 ## What is AWS?
 
@@ -19,9 +19,9 @@ It allows individuals and organizations to *access and use computing resources a
 - These services are provided on a **pay-as-you-go basis**, allowing organizations to *easily scale up or down as needed*. **AWS is a popular choice for businesses of all sizes due to its flexibility, reliability, and security features**. With AWS, organizations can *store and process large amounts of data, build and run applications, and easily deploy and manage their infrastructure*. 
 - AWS is also known for its **broad global footprint**, providing a *presence in multiple geographic regions to enable low-latency access for users around the world*.
 
-![](pics.jpg)
+![](images/pics.jpg)
 
-![](OIP.jpeg) 
+![](images/OIP.jpeg) 
 
 ## Types of Cloud and Cloud Services:
 
@@ -35,7 +35,7 @@ It allows individuals and organizations to *access and use computing resources a
 
 - The main differences between these three types of cloud service are the **level of control and responsibility that the user has over the underlying infrastructure**. With IaaS, the user has the most control over the infrastructure, but also has the most responsibility for managing it. With PaaS, the user has less control over the infrastructure, but can focus more on building and deploying applications. With SaaS, the user has the least control over the infrastructure, but can simply use the software application without worrying about infrastructure or maintenance.
 
-![](services.png)
+![](images/services.png)
 
 
 - Additionally, there are different deployment models for cloud services, including public, private, and hybrid cloud. 
@@ -66,7 +66,7 @@ The data management layer is responsible for managing the application's data and
 
 In a tier 2 architecture, the presentation layer and the data management layer are typically connected using a network protocol, such as HTTP or TCP/IP. The client sends requests to the server, which processes the requests and returns responses to the client. This separation of concerns between the client and server allows for greater scalability, flexibility, and maintainability of the application.
 
-![](aws_diagram.PNG)
+![](images/aws_diagram.PNG)
 
 ---
 
