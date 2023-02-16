@@ -121,3 +121,20 @@ node app.js
 - Now, you should be able to access your ap via the I.P. address of you EC2 instance, without having to mention the port number!
 
 ![](reverseproxy.PNG)
+
+--- 
+
+## Tier 2 architecture - Deploying our `database` VM on EC2
+
+- Requirements
+1. App tier deployed- available on public IP on port 3000(at least)
+
+
+- Now, let`s create 2nd tier with reuired dependencies:
+a. Ubuntu 18.04LTs
+b. Mongodb Installed
+c. Changed configurtion for Mongo.db to 0.0.0.0
+d. Security group for our DB - allow 27017 from anywhere - allow only from app instance.
+e. Go back to the app, create the environment variable that allows the connection of the app to the database.
+f . Relaunch the app.
+g. Securing the database VE through a Firewall(security Group) : database can only be accessed through the app, the app can be accessed only through a secure shell(SSH).
