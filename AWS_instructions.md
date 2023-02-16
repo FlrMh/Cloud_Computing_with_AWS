@@ -1,8 +1,12 @@
 # Creating an AWS EC2 instance(scalable cloud VM) for our local monolith(our app and database VMs):
 
-!!! Note: Make sure our account always has `Ireland(eu-west-01)` as location.
 
-![](EC2diagram.PNG)
+
+![](EC2.jpeg)
+
+## Creating our EC2 instance:
+
+!!! Note: Make sure our account always has `Ireland(eu-west-01)` as location.
 
 1. Search EC2.
 
