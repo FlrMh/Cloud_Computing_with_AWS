@@ -150,7 +150,7 @@ g. Securing the database VE through a Firewall(security Group) : database can on
 
 ```
 - Once inside the EC2 instance, we need to get the provision file for the `database` VM we created locally, so we can provision our EC2 database instance with the same dependencies as our locally created VM.
-- We can do that either by using the `scp` commad we used previously to migrate the `app` folder withinour `app` EC2 instance, or we can copy the file in our `database` EC2 instance by cloning the repository that contains the specific file and run it within our EC2 instance. 
+- We can do that either by using the `scp` commad we used previously to migrate the `app` folder within our `app` EC2 instance, or we can copy the file in our `database` EC2 instance by cloning the repository that contains the specific file and run it within our EC2 instance. 
 - If we want to use the `clone` method, simply run 
 ```
 git clone <http of the repository where we have the database provision file>
@@ -274,5 +274,96 @@ node app.js
 - To access all your created AMIs, simply navigate the left-side menu.
 
 ![](images/acessAMI.PNG)
+
+---
+
+## Creating an AMI for our `database` EC2 instance
+
+- Exactly as we did for the `app` EC2 instance, we will now create an AMI for our `database` EC2 instance.
+- So, once again, select `Image and templates` and further select `Create image`.
+- Name the AMI accordingly e.g. "name-class-ami" and in the description copy and paste the name and add details that would be useful (e.g. litening on port 27017-in the case of the database).
+- Select `Create image`. Once the status is `Avaialble`, feel free to terminate your `database` EC2 instance. 
+- Together with the AMI from the `app` EC2 instance, if you now go to the Images tab in the left-side menu, you should be able to see your AMIs.
+
+![](images/namingami.PNG)
+
+---
+
+## Launching instances from AMI (both for `app` and `database`)
+
+![](images/launchingAMIinstance.PNG)
+
+
+- Now that we have Images f our EC2 instances, and we have terminated both the `app` and `database` EC2 instances, we can recreate the instances by using the AMIs we just created.
+- Go in the Images tab on the menu on the left hand side of the AWS web page.
+- Selected the `app` AMI and click on the AMI ID.
+- This will open a new web page with the details of the AMI. 
+- Select `Launch instance from AMI`.
+
+![](images/amiinstance.PNG)
+
+- Just like when we created the original EC2 instance for our `app` virtual environment, selecting `Launch instance from AMI` will prompt us on a new web page where we have to select the key, the security group, etc.
+- We will have to select a name, the OS will be already selected de to the fact that this EC2 instance is being created after a template.
+- We will have to select a key, which will be the same key we used for the original EC2 instance.
+
+![](images/AMIsettings.PNG)
+
+- And, in terms of Network settings, we can simply select `Select existing Security group` and pick the security group we created for our `app` EC2 instance.
+- Then, we can just `Launch Instance` and we will have a new EC2 instance created from an AMI.
+
+### !!! Note: For our `database` AMI we should follow the same instructions in order to launch an EC2 instance after the `database` AMI.
+
+---
+
+## Launching and connecting our EC2 instances created from AMIs
+
+- Now that we have created new EC2 instances from AMIs from our `app` and `database` initial EC2 instances, we only have to `ssh` into both instances, check that everything is set and running accordingly.
+
+1. In our `database` EC2 instance:
+- Check that our network configurations are correct and allow connection from port 27017:
+```
+sudo nano /etc/mongod.conf
+
+#should say bandIP: 0.0.0.0
+```
+- Check that mongodb is up and running correctly :
+```
+sudo systemctl status mongod
+```
+![](images/activemongo.PNG)
+
+2. In our `app` EC2 instance:
+- Check that we have `nginx` and `node` installed and with the correct versions:
+```
+nginx -v
+
+node -v
+
+```
+
+- Check that our reverse proxy is correctly set with the right cnfiguration:
+
+```
+sudo nano /etc/nginx/sites-available/default
+```
+- Check that we don t have an env variable and set it up:
+```
+export DB_HOST=mongodb://<database EC2 instance IP>:27017/posts
+```
+- Install and launch the app to make sure it is running and connecting to the database:
+```
+cd app/
+
+npm install
+
+node seeds/seed.js
+
+node app.js
+```
+
+- If everything went right, you should be able to see the app running and connecting to the database:
+
+![](images/AMIposts.png)
+
 
 
