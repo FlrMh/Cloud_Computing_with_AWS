@@ -365,5 +365,34 @@ node app.js
 
 ![](images/AMIposts.png)
 
+---
+
+## Setting a monitoring and alerting alarm for our `app` EC2 instance.
+
+- Setting up an Alarm for our system can be very beneficial in monitoring our app 24/7 and ensuring that everything is up an drunning as expected. We can set certain actions to be followed when the Alarm goes off, but for practice purposes, we will simply set an alarm to send us an email when the CPU Utilisation in our EC2  instance has reached a certain treshhold. 
+
+![](images/monitoringAWS.PNG)
+
+-
+
+- In order to set up an alarm for our `app` EC2 instance, in my case that monitors the CPU-Utilisation, we simply need to follow some steps. 
+First, we need to go into the dashboard of our instance, select `Monitoring`, and further Select `Manage detailed monitoring` where you will have to tick the `Enable` box. 
+
+![](images/enablemonitoring.PNG)
+
+[Creating a CPU alarm for an EC2 instance](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/US_AlarmAtThresholdEC2.html)
+
+- First, we need to access the Amazon CloudWatch dashboard. 
+- Go to `Alarms` tab on the left hand side of the dashboard.
+- Further select the option `All alarms`.
+- Select `Create Alarm` and proceed to follow the above instructions step by step.
+!! Note: when prompted to select an SNS topic for alarm, please make sure to first create a new topic containing your Email as the communication endpoint in order to make sure that you receive the Alarm went it goes off. 
+- When finished, please make sure to head back to the AWS CoudWatch Dashboard in order to check that everything went well in terms of set up.
+- If everything went well, you will also receive an email from AWS mentioning your subscritption for the monitoring service as a confirmation for your alarm creation.
+
+
+
+
+
 
 
