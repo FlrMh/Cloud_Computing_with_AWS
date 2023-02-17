@@ -124,10 +124,14 @@ Overall, refactoring a monolith into a tier 2 architecture can be an important p
 
 ## AMI (Amazon Machine Image)
 
- An AMI is a pre-configured virtual machine image used to create EC2 (Elastic Compute Cloud) instances in Amazon Web Services (AWS). An AMI contains an operating system, application server, and other required software components needed to launch an EC2 instance.
+ An ***AMI*** is a **pre-configured virtual machine image used to create EC2 (Elastic Compute Cloud) instances in Amazon Web Services (AWS)**. An AMI contains an *operating system, application server, and other required software components needed to launch an EC2 instance*.
 
-- AMIs are used to create virtual servers quickly and efficiently in the cloud. AWS provides a wide variety of pre-configured AMIs for popular operating systems and software applications. Users can also create their own customized AMIs based on their specific requirements.
+- AMIs are **used to create virtual servers quickly and efficiently in the cloud**. 
+- AWS provides a wide variety of pre-configured AMIs for popular operating systems and software applications.
 
-- When launching an EC2 instance, users can choose the AMI that best meets their needs. The instance will then be launched with the specified operating system, applications, and other software components configured in the selected AMI. This can save users a significant amount of time and effort in setting up and configuring servers in the cloud.
+!!! **Note**: *Users can also create their own customized AMIs based on their specific requirements*.
+
+- When launching an EC2 instance, users can *choose the AMI that best meets their needs*. The **instance will then be launched with the specified operating system, applications, and other software components configured in the selected AMI**. 
+- AMIs can **save users a significant amount of time and effort in setting up and configuring servers in the cloud**.
 
 ![](images/AMI.jpg)
