@@ -254,3 +254,25 @@ node app.js
 - If everything was set up correctly, you should be able to see the posts page.
 
 ![](images/workingposts.PNG)
+
+---
+
+## Creating an AM for our `app` EC2 instance
+
+- Creating AMIs for our  Ec2 instances can help save the company money (in terms of storage) due to the fact that instead of having an EC2 instance that could be running while not used, we can create an AMI (an image of the state of the EC2 instance) that can allow us to launch an instance with the same template and at the same stage as our `app` instance, whenever we need to use it again.
+
+- In order to create an AMI, we need to select the `Action` tab at the top of the AWS page of our instance that we want to crate an AMI for:
+
+![](images/createAMI.PNG)
+
+- Select `Image and templates` and further select `Create image`.
+- This will takes us to a page similar to the page where we created an EC2 instance, where we have to mention the name of our AMI and the description.
+- Best practice would be to name your AMI after your EC2 instance that you create an AMI for + AMI at the end.
+- When it comes to the description, copy + paste the name you assigned it, and mention things like ports allowed, just to give information to the user about what the AMI is a template of. 
+- When ready, simply press `Create image`. It will be in the `Pending` status for a while as it has to cpy all the information from the EC2 instance. 
+- Once finished, feel free to delete the EC2 instance if no longer needed or in use. 
+- To access all your created AMIs, simply navigate the left-side menu.
+
+![](images/acessAMI.PNG)
+
+

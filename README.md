@@ -118,3 +118,16 @@ Refactoring a monolith into a tier 2 architecture can help support these methodo
 4. Delivering Working Software Frequently: In Agile and Scrum, the goal is to deliver working software frequently. Refactoring a monolith into a tier 2 architecture can help enable this by making it easier to deploy individual components independently of each other.
 
 Overall, refactoring a monolith into a tier 2 architecture can be an important part of an Agile or Scrum framework, as it can help support flexibility, collaborative development, iterative and incremental development, and delivering working software frequently.
+
+---
+
+
+## AMI (Amazon Machine Image)
+
+ An AMI is a pre-configured virtual machine image used to create EC2 (Elastic Compute Cloud) instances in Amazon Web Services (AWS). An AMI contains an operating system, application server, and other required software components needed to launch an EC2 instance.
+
+- AMIs are used to create virtual servers quickly and efficiently in the cloud. AWS provides a wide variety of pre-configured AMIs for popular operating systems and software applications. Users can also create their own customized AMIs based on their specific requirements.
+
+- When launching an EC2 instance, users can choose the AMI that best meets their needs. The instance will then be launched with the specified operating system, applications, and other software components configured in the selected AMI. This can save users a significant amount of time and effort in setting up and configuring servers in the cloud.
+
+![](images/AMI.jpg)
