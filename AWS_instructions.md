@@ -390,10 +390,110 @@ First, we need to go into the dashboard of our instance, select `Monitoring`, an
 !! Note: when prompted to select an SNS topic for alarm, please make sure to first create a new topic containing your Email as the communication endpoint in order to make sure that you receive the Alarm went it goes off. 
 - When finished, please make sure to head back to the AWS CoudWatch Dashboard in order to check that everything went well in terms of set up.
 - If everything went well, you will also receive an email from AWS mentioning your subscritption for the monitoring service as a confirmation for your alarm creation.
+---
+
+## Setting up an AWS S3 Bucket
+
+- Setting up an AWS S3 bucket(folder) can be extremely useful for disaster recovery, social media, allowing public access to documents via cloud, etc.
+
+![](images/s3diagram.PNG)
+
+- As you can see on the diagram, in order to create and make use of a S3 bucket, we need to first create an EC2 instance. Please see the previous sections for intructions.
+
+!! Note: The diagram mentions that we need "AWS Secret& Access keys" to be able to access the S3 instance. Please make sure you have these from your AWS admin before proceeding.
+
+- Once our Ec2 instance is set, we need to SSH into it, as normally.
+- The next step will be to make sure we have access and connection to internet by running
+```
+sudo apt-get update -y
+sudo apt-get upgrade -y
+```
+- Once we established that we have an internet connection, the next step (see diagram) will be to install Python and its dependancies, as S3 is built on Python, so we need it to interact with this service.
+
+```
+# Install Python
+sudo apt install poython -y
+
+# check Python version (will output python 2.7 = default used version. MUST be at least Python 3.6)
+python --version
 
 
+# changing to Python 3 (in this way we are telling the system to use Python 3)
+alias python=python3
 
 
+# checking the version again 
+python --version
+# will output python 3.6.9
+# remember that the aliases disappear when the session ends.
+
+# Install pip
+sudo apt install python3-pip
+
+# Install AWS CLI
+sudo pip3 install awscli
+
+aws configure
+# this will prompt us to insert the AWS Access & Secure keys. 
+# Further it will ask you to introduce the default region name (where the requests to the bucket will be sent from - S3 buckets are available globally, but we need to specify a location from where we will interract with it = default region name of your EC2 instance)
+
+# Lastly, it will ask for the type of output you would like (in my case, JSON).
+
+# If everything went well, you should be able to receive the buckets in a server when running the following command:
+aws s3 ls
+# if you received "access denied" it means that you have a typing error in the configuration process.
+
+```
+- We should now have a secure connection between our EC2 instance to the S3 service!
+
+- We should now be able to perform minimum CRUD(create, read, update and delete) operations.
+
+- Next step is to create our own bucket!
+```
+aws s3 mb s3://name-respecting-conventions
+# mb = make bucket; we cannot use "_"; use explicit name for your bucket.
+
+aws s3 ls # to confirm your bucket has been created
+
+
+```
+- You should be able to see your bucket on the AWS website, on the S3 dashboard.
+
+![](images/flrs3.PNG)
+
+- If we want to upload something in our bucket, we can do it via the dashboard, using the "Upload" button. 
+- However, we can also do it through cml.
+- In order to store some data within our bucket, let`s create a file.
+```
+sudo touch test.txt
+
+ls # check the file has been created
+
+sudo nano test.txt # add whatever text you would like to have in the file, then save it using Ctrl + X, Y and Enter
+
+cat test.txt # to see the content of your file and make sure your changes have been changed
+
+```
+- In order to be able to upload it into our personal bucket, we must do the following:
+```
+aws s3 cp test.txt s3://name-of-your-bucket
+```
+- The file should now be successfully added to your bucket and should be available to view online on the dashboard. 
+
+![](images/s3file.PNG)
+
+- There is our file created!
+- If we want to allow public access to our file through an URL, we only have to change the permissions of the file. 
+
+!!! Note: Permission of the files within a bucket are dependable on the permissions of the bucket itself. However, we have the option to specific permissions for each file.
+- Permissions for a file can be accessed by clicking on the file name, choosing 'Permissions', then 'Edit'.
+- Within the 'Edit access control list' tick all the unticked Boxes (Read access).
+- Thick the box that request your confirmation for making the changes, then simply press "Save changes".
+- Now, if we click on the URL of the file, we should be able to see our file and the text within it.
+
+![](images/testurl.PNG)
+
+Happy days! We have created a file that can be accessed through an URL using S3 service on AWS.
 
 
 
