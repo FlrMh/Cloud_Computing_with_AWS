@@ -166,6 +166,7 @@ Overall, **AWS CloudWatch** provides a *comprehensive monitoring and logging sol
 - **S3** stores data as objects, which can be any type of file, including **text files, images, videos, and documents**. *Each object is identified by a unique key*, which can be used to retrieve the object from S3.
 
 - S3 provides several features that make it a **highly reliable and secure storage solution**:
+
 a. versioning
 
 b. encryption
