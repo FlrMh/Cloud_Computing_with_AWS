@@ -412,7 +412,7 @@ sudo apt-get upgrade -y
 
 ```
 # Install Python
-sudo apt install poython -y
+sudo apt install python -y
 
 # check Python version (will output python 2.7 = default used version. MUST be at least Python 3.6)
 python --version
@@ -495,5 +495,23 @@ aws s3 cp test.txt s3://name-of-your-bucket
 
 Happy days! We have created a file that can be accessed through an URL using S3 service on AWS.
 
+- If we want to delete a file from out bucket, we have to use:
+```
+aws s3 rm s3://bucket-name/bucket file
+
+# if we want to delete all the files in a bucket
+
+aws s3 rm s3://fucket-name --recursive
+```
+
+!! Note: As S3 offers backup, we can download our file from the S3 bucket using:
+```
+aws s3 cp s3://bucket-name/file-to-copy name-of-the-copied-file-in-our-local-machine
+```
+- Now, if the bucket is empty and we want to remove our bucket from the S3 service, we can do it by using:
+```
+aws s3 rb s3://bucket-name
+```
+!!! Please, be advised that the bucket will not be removed unless all the files inside the bucket have been deleted. 
 
 
