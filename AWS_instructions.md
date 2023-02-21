@@ -524,6 +524,78 @@ aws s3 rb s3://bucket-name
 sudo pip3 install boto3
 ```
 - In my case, I have to create a Pyhton file that contain the instruction for fullfilling the following tasks: create a bucket, create a file that will be a reproduction of a file that exists within my local host, upload the file to the bucket, delete the filde, and lastly delete the bucket.
-- Remember to `import boto3` at the beginning of your python file!! 
+- Remember to `import boto3` at the beginning of your python file!!
+
+---
+
+## Creating an Autoscaling group and Load balancing
+
+![](images/autoandload.png)
+
+1. Create launch template for autoscaling group
+- On the left side of the Ec2 dashboard, we have the Instances tab where we can find `Launch template`. 
+- Select Launch template.
+- Because we do not have a template created, we have to create one.
+- Select `Create Launch template`.
+- Name if using the same name convention : e.g. `florina-tech201-ASG-1`.
+- Copy and paste the name in the description.
+- Tick the box for `Autoscaling guidance`.
+- Select `Ubuntu 18.04` for O.S. as we want all the instances in the Autoscaling group to have the same configuration.
+- For Instance type select `t2.micro`, as this is what we used before and it works for us.
+- Select the same key as before for the access, e.g. in my case `devops-tech201`.
+- For Security group select the previously made security froup for your App instance.
+- User data to automate provisioning to be used. We would like to make sure that all the machines have the same provisioning, so when the autoscaling launches it, it needs to facilitate it with the same functionality for all the users that use the app. So, we will write a script that does all the provisioning for us when the instance is launched. 
+- On Advanced details, scroll down to the bottom, and stop when it says `user data`.
+- Here is where we will do the bash scripting for the provisioning of our instance.
+
+```
+#!/bin/bash
+
+sudo apt update -y
+sudo apt upgrade -y
+
+sudo apt install nginx -y
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+``` 
+
+- **BE AWARE: if you have any typos, the user data provision will not work and everything will need to be done manually!!!**
+- If the summary looks correct, select `Create launch template`.
+
+Now, we have a launch template, but we do not have a load balancer, an autoscaling group, or a policy. So, so far we have done 25% of the work. 
+
+- Now that we have a launch tamplate, we would like to use it to create an autoscaling group (find it at the bottom of the EC2 danshboard under `Auto Scaling`).
+- Let`s create an Auto scaling group. 
+- Select `Create an auto scaling group`.
+- Same naming convention `florina-tech201-ASG-app`.
+- For launch template, select the launch template we have just created earlier.
+- Select `Next`.
+- VPC will be default.
+- As we want to create an instance in eu-west-1a, one in eu-west-1b, one in eu-west-1c. We will do that by selecting on availability zones `DevOpsStudent default 1a`, `DevOpsStudent default 1b`, respectively `DevOpsStudent default 1c`.
+- Select `Next`.
+- We need to create the Load balancer as mentioned in the diagram.
+- We want an Application Load Balancer, by selecting `Attach a new load balancer` and select `Application load balancer`.
+- The name will be automatically generated, e.g. `florina-tech201-ASG-app-1`.
+- We need the load-balancer to be `Internet-facing` as it needs to facilitate internet users that access the app.
+- We need to tell the load balancer to allow port 80 connection as our instances need that, and although our template does that, the load balancer needs to be instructed as well.
+- So, on `Listeners and routing`, select for port 80- `Create a target group`.
+- A name for the target group will be assigned automatically that will allow access via port 80 due to our template only having NGINX as provisioning.
+- `Health checks` = IMPORTANT! - automatically replaces the instances that have failed. So, tick the box for `ELB`.
+- Select `Next`.
+- Policy setup! Why and when it should scale up! 
+- Group size: Desired - 2, Minimum - 2, Maximum - 3.
+- Scaling policies- Select `Target tracking Policy`.
+- In the default, it will monitor the CPU Utilization, when it reaches 50 it will create a new instance as part of autoscaling.
+- Select `Next`.
+- Add notification - select `Next`.
+- Add tags - Ideally ADD TAGS as the autoscaling group in connection to the load balancer will create 2 instances that need to be names so we can differentiate them from other instances. 
+- Respect naming convention , for `key` type "Name", for `value` type `florina-tech201-HA-HS`.
+- Lastly, `Create auto scaling group`. 
+- Now, once the instances have been created, due to the provisioning file that installs nginx, if we simply copy and paste the IP addresses of the instances in our browser, we should be able to get the webpage `Welcome to nginx`. 
+
+![](images/nginx.PNG)
+
+
+
 
 
