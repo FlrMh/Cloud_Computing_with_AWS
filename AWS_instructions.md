@@ -514,4 +514,16 @@ aws s3 rb s3://bucket-name
 ```
 !!! Please, be advised that the bucket will not be removed unless all the files inside the bucket have been deleted. 
 
+- If we want to automate the process of creating a bucket, adding a file to the bucket, deleting the file and deleting the bucket, we can do that by using `boto3`.
+- Boto3 is an AWS SDK(Software development kit) for Python that allows us to create, configure and manage AWS services such as EC2 and S3.
+- To be able to install and use Boto3, we have to make sure we have Python installed in our EC2, as well as pip.
+
+```
+#Installing boto3
+
+sudo pip3 install boto3
+```
+- In my case, I have to create a Pyhton file that contain the instruction for fullfilling the following tasks: create a bucket, create a file that will be a reproduction of a file that exists within my local host, upload the file to the bucket, delete the filde, and lastly delete the bucket.
+- Remember to `import boto3` at the beginning of your python file!! 
+
 
