@@ -595,6 +595,29 @@ Now, we have a launch template, but we do not have a load balancer, an autoscali
 
 ![](images/nginx.PNG)
 
+!!! **NOTE**: If we want to automate the entire process, and have the app up and running every single time we launch an EC2 instance within our autoscaling group, we have to make sure the `launch template` is made using the AMI we created after our initial EC2 instance that was set with a reverse proxy and where the app was up and running.
+
+We also have to make sure that the `user data` section in the configuration of our launch template runs a command that installs and launches our app, but runs it in the background, rather than in the foreground.
+
+In this case, our `user data` section will look like this:
+
+```
+#!/bin/bash
+
+sudo apt update -y 
+sudo apt upgrade -y
+
+cd /path/to/our/app/folder
+
+nohup npm start 2>/dev/null 1>/dev/null&
+
+```
+Our app should be accessible only by copy and pasting the IP address of our instance in the browser, and without having to ssh within our EC2 instance!
+
+![](images/reverseproxy.PNG)
+
+
+
 
 
 
