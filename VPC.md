@@ -113,7 +113,7 @@ b .**Private Subnets**
 
 !! If unsure how to create a subnet, use the following calculator to create one.
 
-[Create a subnet calculator](https://mxtoolbox.com/subnetcalculator.aspx)
+[Subnet calculator](https://mxtoolbox.com/subnetcalculator.aspx)
 
 - Select `create subnet`. 
 - If you get an error, it means that your subnet is used already, so you have to try again with a different subnet.
